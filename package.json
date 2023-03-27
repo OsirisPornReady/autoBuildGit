@@ -1,0 +1,93 @@
+{
+  "name": "autobuildgit",
+  "private": true,
+  "version": "0.0.0",
+  "main": "./dist-electron/index.js",
+  "scripts": {
+    "start": "yarn run dev",
+    "dev": "cross-env NODE_ENV=development vite --mode development",
+    "prod": "cross-env NODE_ENV=development vite --mode production",
+    "build": "vue-tsc && vite build",
+    "preview": "vite preview",
+    "build:electron": "vue-tsc --noEmit && vite build && electron-builder --win --x64"
+  },
+  "dependencies": {
+    "@ant-design/icons-vue": "^6.1.0",
+    "@types/js-yaml": "^4.0.5",
+    "ant-design-vue": "^3.2.15",
+    "axios": "^1.3.4",
+    "fs-extra": "^11.1.1",
+    "js-yaml": "^4.1.0",
+    "less": "^4.1.3",
+    "rxjs": "^7.8.0",
+    "vue": "^3.2.45",
+    "vue-router": "^4.1.6",
+    "yaml": "^2.2.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.0.0",
+    "cross-env": "^7.0.3",
+    "electron": "^22.0.0",
+    "electron-builder": "^23.6.0",
+    "multispinner": "^0.2.1",
+    "typescript": "^4.9.3",
+    "vite": "^4.0.0",
+    "vite-plugin-electron": "^0.11.1",
+    "vite-plugin-electron-renderer": "^0.11.4",
+    "vue-tsc": "^1.0.11"
+  },
+  "build": {
+    "appId": "autoBuildGit",
+    "productName": "autoBuildGit",
+    "asar": true,
+    "copyright": "Copyright © 2023 ash",
+    "directories": {
+      "output": "./release/"
+    },
+    "files": [
+      "./dist",
+      "./dist-electron/index.js",
+      "./package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "./public/autoBuildGitData",
+        "to": "autoBuildGitData"
+      }
+    ],
+    "mac": {
+      "artifactName": "${productName}_${version}.${ext}",
+      "target": [
+        "dmg"
+      ]
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "artifactName": "${productName}_${version}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": true,
+      "deleteAppDataOnUninstall": false,
+      "shortcutName": "自动打包工具"
+    },
+    "publish": [
+      {
+        "provider": "generic",
+        "url": "http://127.0.0.1:8080"
+      }
+    ],
+    "releaseInfo": {
+      "releaseNotes": "版本更新的具体内容"
+    }
+  }
+}

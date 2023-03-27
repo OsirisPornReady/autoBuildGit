@@ -1,0 +1,39 @@
+- title: 测试标题
+  timeTitle: 2022.2.2
+  primaryKey: 1
+  thumb: thumb1.jpg
+  src: vid1.jpg
+  brief: 测试简介
+  category:
+    time: "2"
+    fireCase: "1"
+    fireLevel: "1"
+    areaCase: "1"
+    area: "1"
+  fake: false
+- title: aa
+  timeTitle: 2022.3.3
+  primaryKey: 2
+  thumb: aa
+  src: "22"
+  brief: 1123124ef
+  category:
+    time: "2"
+    fireCase: "1"
+    fireLevel: "2"
+    areaCase: "1"
+    area: "1"
+  fake: false
+- title: "11"
+  timeTitle: "22"
+  primaryKey: 3
+  thumb: "11"
+  src: "22"
+  brief: "33"
+  category:
+    time: "1"
+    fireCase: "2"
+    fireLevel: "1"
+    areaCase: "1"
+    area: "2"
+  fake: false
