@@ -1,33 +1,8 @@
 - key: 1
-  title: 测试标题
-  time: "2"
-  timeTitle: 2022.2.2
-  fireCase: "1"
-  fireLevel: "1"
-  areaCase: "1"
-  area: "1"
-  thumb: thumb1.jpg
-  src: vid1.jpg
-  brief: 测试简介
-- key: 2
-  title: aa
-  time: "2"
-  timeTitle: 2022.3.3
-  fireCase: "1"
-  fireLevel: "2"
-  areaCase: "1"
-  area: "1"
-  thumb: aa
-  src: "22"
-  brief: 1123124ef
-- key: 3
   title: "11"
-  time: "1"
-  timeTitle: "22"
-  fireCase: "2"
-  fireLevel: "1"
-  areaCase: "1"
-  area: "2"
-  thumb: "11"
-  src: "22"
+  type:
+    value: "1"
+    label: 前端
+  path: "22"
+  time: 2023-03-20
   brief: "33"

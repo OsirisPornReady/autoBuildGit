@@ -1,5 +1,7 @@
 <template>
-  <router-view></router-view>
+  <a-config-provider :locale="zhCN">
+    <router-view></router-view>
+  </a-config-provider>
 </template>
 
 <script setup lang="ts">
@@ -7,6 +9,7 @@ import { onMounted, ref, provide } from "vue";
 import {router} from '@/utils/common';
 import { Broadcast, options, tableOptions } from "@/service/global.service";
 import { getL, setL } from "@/utils/simpleLocalstorage";
+import zhCN from 'ant-design-vue/es/locale/zh_CN'
 
 const { navigateTo } = router()
 const broadcast = new Broadcast();

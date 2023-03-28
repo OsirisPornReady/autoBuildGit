@@ -11,25 +11,25 @@
 
   <a-table :columns="columns" :data-source="dataSource" :scroll="{ x: true }" bordered>
     <template #bodyCell="{ column, text, record }">
-      <template v-if="['title', 'time', 'fireCase', 'fireLevel', 'areaCase', 'area'].includes(column.dataIndex)">
-        <template v-if="column.dataIndex === 'title'">
+      <template v-if="['title', 'type', 'path', 'time', 'brief'].includes(column.dataIndex)">
+        <template v-if="column.dataIndex === 'title' || column.dataIndex === 'brief'">
           <a-tooltip placement="topLeft" :title="text">
             {{ text }}
           </a-tooltip>
         </template>
-        <template v-else-if="column.dataIndex === 'thumb' || column.dataIndex === 'src' || column.dataIndex === 'brief' || column.dataIndex === 'timeTitle'">
-          <div>{{ text }}</div>
+        <template v-else-if="column.dataIndex === 'type'">
+          <div>{{ text.label }}</div>
         </template>
         <template v-else>
-          <div>{{ tableOptions[column.dataIndex][text] }}</div>
+          <div>{{ text }}</div>
         </template>
       </template>
       <template v-else-if="column.dataIndex === 'operation'">
         <div class="editable-row-operations">
           <span>
-            <a @click="edit(record)">Edit</a>
+            <a @click="edit(record)">edit</a>
             <a-divider type="vertical" />
-            <a @click="del(record)">Del</a>
+            <a @click="del(record)">del</a>
           </span>
         </div>
       </template>
@@ -71,54 +71,25 @@ const columns = [
     ellipsis: true
   },
   {
+    title: 'type',
+    dataIndex: 'type',
+    width: 100,
+  },
+  {
+    title: 'path',
+    dataIndex: 'path',
+    width: 100,
+    ellipsis: true
+  },
+  {
     title: 'time',
     dataIndex: 'time',
-    width: 100,
-  },
-  {
-    title: 'timeTitle',
-    dataIndex: 'timeTitle',
-    width: 100,
-  },
-  {
-    title: 'fireCase',
-    dataIndex: 'fireCase',
-    width: 100,
-    ellipsis: true
-  },
-  {
-    title: 'fireLevel',
-    dataIndex: 'fireLevel',
-    width: 100,
-    ellipsis: true
-  },
-  {
-    title: 'areaCase',
-    dataIndex: 'areaCase',
-    width: 100,
-    ellipsis: true
-  },
-  {
-    title: 'area',
-    dataIndex: 'area',
     width: 100,
     ellipsis: true
   },
   {
     title: 'brief',
     dataIndex: 'brief',
-    width: 100,
-    ellipsis: true
-  },
-  {
-    title: 'thumb',
-    dataIndex: 'thumb',
-    width: 100,
-    ellipsis: true
-  },
-  {
-    title: 'src',
-    dataIndex: 'src',
     width: 100,
     ellipsis: true
   },
@@ -133,14 +104,14 @@ let data: any = null;
 const dataSource = ref<any>([]);
 
 let recordKey = 0;
-let editData = {};
+let editData: any = {};
 let modalTitle = ref('')
 
 onMounted(() => {
   loadData();
 })
 
-const add = (record: any) => {
+const add = () => {
   modalTitle.value = '新增';
   recordKey = 0;
   editData = {};
@@ -150,8 +121,7 @@ const add = (record: any) => {
 const edit = (record: any) => {
   modalTitle.value = '修改';
   recordKey = record.key;
-  editData = toRaw(record);
-  console.log(recordKey)
+  editData = record;
   visible.value = true;
 };
 
@@ -191,7 +161,12 @@ const handleCallback = (e: any) => {
 const loadData = () => {
   data = sendMessageToMain('loadLocalData');
   console.log('本地数据: ', data)
-  dataSource.value = data;
+  message.success('本地数据已导入')
+  if (data) {
+    dataSource.value = data;
+  } else {
+    dataSource.value = [];
+  }
 }
 
 const download = () => {
