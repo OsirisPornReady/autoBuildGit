@@ -6,7 +6,8 @@
     <a-button type="dashed" @click="add">Add</a-button>
     <a-button type="dashed" @click="download">Download</a-button>
     <a-button type="dashed" @click="loadData">Reload</a-button>
-    <a-button type="primary" danger @click="dumpfile">整理成最终形式</a-button>
+<!--    <a-button type="primary" danger @click="dumpfile">整理成最终形式</a-button>-->
+    <a-button type="primary" danger @click="testBatch">调用测试</a-button>
   </a-space>
 
   <a-table :columns="columns" :data-source="dataSource" :scroll="{ x: true }" bordered>
@@ -29,7 +30,15 @@
           <span>
             <a @click="edit(record)">edit</a>
             <a-divider type="vertical" />
-            <a @click="del(record)">del</a>
+            <a-popconfirm
+                title="Are you sure delete this task?"
+                ok-text="Yes"
+                cancel-text="No"
+                @confirm="(e) => { del(record); message.success('删除成功') }"
+                @cancel="(e) => {}"
+            >
+              <a>del</a>
+            </a-popconfirm>
           </span>
         </div>
       </template>
@@ -199,6 +208,10 @@ const dumpfile = () => {
   }
   sendMessageToMain('dumpData', dumpData);
   message.success('数据已整理完毕')
+}
+
+const testBatch = () => {
+  sendMessageToMain('testBatch');
 }
 
 </script>

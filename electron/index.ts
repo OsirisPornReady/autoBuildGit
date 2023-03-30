@@ -9,6 +9,7 @@ import yaml from 'js-yaml';
 // import fetch from "electron-fetch";
 // import Store from 'electron-store';
 // import schedule from 'node-schedule';
+import * as child_process from "child_process";
 
 //获取当前环境
 const evn = process.env.NODE_ENV;
@@ -91,6 +92,13 @@ const createWindow = async () => {
         // console.log(docData);
         let res = path.join(dataPath, '/final.yml')
         fs.writeFileSync(res, docData, 'utf-8');
+        event.returnValue = '';
+    })
+
+    ipcMain.on('testBatch', (event, args) => {
+        let batPath = path.join(dataPath, '/batch/test.bat')
+        console.log(batPath)
+        child_process.execFileSync(batPath);
         event.returnValue = '';
     })
 }

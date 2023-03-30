@@ -1,8 +1,8 @@
 - key: 1
-  title: "11"
+  title: 测试脚本
   type:
-    value: "1"
-    label: 前端
-  path: "22"
-  time: 2023-03-20
-  brief: "33"
+    value: "3"
+    label: windows脚本
+  path: test.bat
+  time: 2023-03-29
+  brief: 测试脚本，win10环境下batch文件
